@@ -8,198 +8,239 @@
 <meta property="og:title" content="THE CYBER ALCHEMIST">
 <meta property="og:description" content="I turn raw digital lead into systems that mint gold while you sleep.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c9a227' stroke-width='1'%3E%3Ccircle cx='12' cy='12' r='8'/%3E%3Cpath d='M12 3v6M12 15v6M3 12h6M15 12h6'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='1'%3E%3Ccircle cx='12' cy='12' r='8'/%3E%3Cpath d='M12 3v6M12 15v6M3 12h6M15 12h6'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+  /* ── Creative Lemon DESIGN.md tokens · luxury · "Cyber Alchemist" ─────── */
   :root{
-    --void:#0a0906;
-    --ink:#0e0c07;
-    --bone:#efe6d2;
-    --bone-dim:#a89a7c;
-    --gold:#c9a227;
-    --gold-bright:#e8c65c;
-    --line:rgba(201,162,39,.28);
+    --bg:#101012;            /* deep ink — page ground        */
+    --surface:#191919;       /* card / hover ground           */
+    --ink:#efe9dd;           /* primary text (AA on --bg)     */
+    --ink-dim:#a0a0a0;       /* secondary text (AA on --bg)   */
+    --accent:#d4af37;        /* champagne gold — rare, earned */
+    --accent-bright:#e8c65c; /* italic em only                */
+    --line:colour-mix(in srgb, currentColor 18%, transparent);
+    --line-gold:colour-mix(in srgb, #d4af37 22%, transparent);
+    /* fluid type (16px base, 1.25 ratio) */
+    --fs-display:clamp(52px, 4.2rem + 10cqw, 104px);
+    --fs-h2:clamp(29px, 2.44rem + 5cqw, 39px);
+    --fs-h3:clamp(23px, 1.95rem + 4cqw, 31px);
+    --fs-lead:clamp(15px, 1.25rem + 3cqw, 20px);
+    --fs-body:clamp(14px, 1rem + 2cqw, 16px);
+    --fs-label:clamp(10px, 0.64rem + 1cqw, 11px);
+    --ease-hero:cubic-bezier(.19,1,.22,1);
+    --sspace:64px;           /* section rhythm               */
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;scroll-padding-top:120px}
   body{
-    background:var(--void);
-    color:var(--bone);
+    background:var(--bg);color:var(--ink);
     font-family:'Space Grotesk',sans-serif;
-    overflow-x:hidden;
+    overflow-x:hidden;font-size:var(--fs-body);line-height:1.6;
   }
-  /* ornamental frame */
-  .frame{
-    position:fixed;inset:14px;z-index:100;pointer-events:none;
-    border:1px solid var(--line);
-  }
-  .frame::before,.frame::after{
-    content:"";position:absolute;width:22px;height:22px;border:1px solid var(--gold);
-  }
+  ::selection{background:var(--accent);color:var(--bg)}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:2px}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+    clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+  /* skip link */
+  .skip{position:fixed;top:-60px;left:24px;z-index:200;background:var(--accent);color:var(--bg);
+    padding:10px 18px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:top .3s}
+  .skip:focus{top:16px}
+  .skip:focus-visible{outline:none}
+
+  /* ornamental frame + grain (decorative) */
+  .frame{position:fixed;inset:14px;z-index:100;pointer-events:none;border:1px solid var(--line-gold)}
+  .frame::before,.frame::after{content:"";position:absolute;width:22px;height:22px;border:1px solid var(--accent)}
   .frame::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
   .frame::after{bottom:-1px;right:-1px;border-left:none;border-top:none}
-  /* grain */
-  .grain{
-    position:fixed;inset:0;z-index:99;pointer-events:none;opacity:.06;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
+  .grain{position:fixed;inset:0;z-index:99;pointer-events:none;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+  /* scroll progress (native scroll-driven) */
+  #progress{position:fixed;inset:0 0 auto 0;z-index:120;height:3px;background:var(--accent);
+    transform-origin:left;transform:scaleX(0);
+    animation:grow linear both;animation-timeline:scroll();animation-duration:auto}
+  @keyframes grow{to{transform:scaleX(1)}}
+
   /* header */
-  header{
-    position:fixed;top:0;left:0;right:0;z-index:50;
-    display:flex;justify-content:space-between;align-items:center;
-    padding:34px 56px;
-    font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--bone-dim);
-  }
-  header .sigil-head{width:26px;height:26px;stroke:var(--gold)}
+  header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;
+    padding:34px 56px;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-dim);
+    animation:compact linear both;animation-timeline:scroll();animation-range:0 200px}
+  @keyframes compact{to{padding-block:14px;background:colour-mix(in srgb, var(--bg) 82%, transparent);backdrop-filter:blur(12px)}}
+  header .sigil-head{width:26px;height:26px;stroke:var(--accent)}
   nav{display:flex;gap:34px}
   nav a{color:inherit;text-decoration:none;position:relative;transition:color .3s}
-  nav a::after{
-    content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--gold);
-    transition:width .35s;
-  }
-  nav a:hover{color:var(--gold-bright)}
+  nav a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--accent);transition:width .35s var(--ease-hero)}
+  nav a:hover{color:var(--accent-bright)}
   nav a:hover::after{width:100%}
+
   /* hero */
-  .hero{
-    min-height:100vh;display:flex;flex-direction:column;justify-content:center;
-    padding:0 56px;position:relative;overflow:hidden;
-  }
-  .sigil{
-    position:absolute;right:-140px;top:50%;transform:translateY(-50%);
-    width:640px;height:640px;opacity:.5;
-    animation:spin 90s linear infinite;
-  }
-  @keyframes spin{to{transform:translateY(-50%) rotate(360deg)}}
-  .eyebrow{
-    font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);
-    display:flex;align-items:center;gap:16px;margin-bottom:34px;
-  }
-  .eyebrow::before{content:"";width:56px;height:1px;background:var(--gold)}
-  .avail{
-    margin-left:auto;display:inline-flex;align-items:center;gap:10px;
-    font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--bone-dim);
-    border:1px solid var(--line);padding:10px 18px;border-radius:99px;
-  }
-  .avail .dot{
-    width:7px;height:7px;border-radius:50%;background:#5fc66a;
-    animation:pulse 2s ease-in-out infinite;
-  }
+  .hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+    padding:0 56px;position:relative;overflow:hidden}
+  .sigil{position:absolute;right:-140px;top:50%;width:640px;height:640px;opacity:.5;
+    animation:spin 90s linear infinite; /* ambient; decorative */
+    animation:spin 90s linear infinite, drift linear both;
+    animation-timeline:auto, view();
+    animation-range:auto, exit 0% exit 100%}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes drift{to{transform:translateY(-12%)}}
+  .eyebrow{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--accent);
+    display:flex;align-items:center;gap:16px;margin-bottom:34px}
+  .eyebrow::before{content:"";width:56px;height:1px;background:var(--accent)}
+  .avail{margin-left:auto;display:inline-flex;align-items:center;gap:10px;
+    font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-dim);
+    border:1px solid var(--line-gold);padding:10px 18px;border-radius:999px}
+  .avail .dot{width:7px;height:7px;border-radius:50%;background:#5fc66a;animation:pulse 2s ease-in-out infinite}
   @keyframes pulse{50%{opacity:.25}}
-  h1{
-    font-family:'Cormorant Garamond',serif;font-weight:500;
-    font-size:clamp(56px,9vw,130px);line-height:.98;letter-spacing:-.01em;
-    max-width:14ch;position:relative;z-index:2;
-  }
-  h1 em{font-style:italic;color:var(--gold-bright)}
-  .lede{
-    margin-top:36px;max-width:48ch;color:var(--bone-dim);
-    font-weight:300;font-size:clamp(15px,1.3vw,19px);line-height:1.7;
-  }
-  .lede strong{color:var(--bone);font-weight:500}
-  .lede .gold{color:var(--gold)}
-  .hero-foot{
-    position:absolute;bottom:44px;left:56px;right:56px;
+  h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:var(--fs-display);line-height:.98;letter-spacing:-.01em;max-width:15ch;position:relative;z-index:2}
+  h1 em{font-style:italic;color:var(--accent-bright)}
+  .mask{display:block;overflow:hidden}
+  .mask>span{display:block;transform:translateY(112%);animation:lineUp .9s var(--ease-hero) forwards}
+  .mask:nth-child(2)>span{animation-delay:.12s}
+  .mask:nth-child(3)>span{animation-delay:.24s}
+  @keyframes lineUp{to{transform:translateY(0)}}
+  .lede{margin-top:36px;max-width:52ch;color:var(--ink-dim);
+    font-weight:300;font-size:var(--fs-lead);line-height:1.7;
+    opacity:0;animation:fade .8s ease .45s forwards}
+  .lede strong{color:var(--ink);font-weight:500}
+  .lede .gold{color:var(--accent)}
+  .hero-foot{position:absolute;bottom:44px;left:56px;right:56px;
     display:flex;justify-content:space-between;align-items:flex-end;
-    font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--bone-dim);
-  }
-  .hero-foot a{color:var(--gold);text-decoration:none;letter-spacing:.12em;text-transform:none;font-size:12px}
-  .hero-foot a:hover{color:var(--gold-bright)}
-  /* marquee */
-  .discipline{
-    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-    padding:18px 0;overflow:hidden;white-space:nowrap;
-  }
-  .discipline span{
-    display:inline-block;
-    font-size:12px;letter-spacing:.42em;text-transform:uppercase;color:var(--bone-dim);
-    animation:slide 26s linear infinite;
-  }
+    font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-dim);
+    opacity:0;animation:fade .8s ease .6s forwards}
+  @keyframes fade{to{opacity:1}}
+  .hero-foot a{color:var(--accent);text-decoration:none;letter-spacing:.12em;text-transform:none;font-size:12px;position:relative}
+  .hero-foot a::after{content:"→";display:inline-block;margin-left:8px;transition:transform .35s var(--ease-hero)}
+  .hero-foot a:hover{color:var(--accent-bright)}
+  .hero-foot a:hover::after{transform:translateX(6px)}
+  .hero .cue{position:absolute;bottom:44px;left:50%;transform:translateX(-50%);
+    width:1px;height:56px;background:var(--line-gold);overflow:hidden}
+  .hero .cue::after{content:"";position:absolute;inset:0;background:var(--accent);
+    animation:sink 2.2s var(--ease-hero) infinite}
+  @keyframes sink{0%{transform:translateY(-100%)}60%{transform:translateY(0)}100%{transform:translateY(100%)}}
+  .hero .cue.off{display:none}
+
+  /* marquee (decorative, paused for reduced motion) */
+  .discipline{border-top:1px solid var(--line-gold);border-bottom:1px solid var(--line-gold);
+    padding:18px 0;overflow:hidden;white-space:nowrap}
+  .discipline span{display:inline-block;font-size:12px;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--ink-dim);animation:slide 26s linear infinite}
+  .discipline b{color:var(--accent);font-weight:400}
   @keyframes slide{to{transform:translateX(-50%)}}
-  .discipline b{color:var(--gold);font-weight:400}
-  /* sections */
-  section{padding:120px 56px}
-  .section-label{
-    font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);
-    display:flex;align-items:center;gap:14px;margin-bottom:64px;
-  }
-  .section-label::before{content:"";width:44px;height:1px;background:var(--gold)}
+
+  main{display:block}
+  section{padding:var(--sspace) 56px}
+  .section-label{font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--accent);
+    display:flex;align-items:center;gap:14px;margin-bottom:64px}
+  .section-label::before{content:"";width:44px;height:1px;background:var(--accent)}
+
+  /* reveal on view — native scroll-driven, compositor-only */
+  .reveal{animation:reveal linear both;animation-timeline:view();animation-range:entry 0% cover 30%}
+  @keyframes reveal{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+  /* JS fallback for browsers without animation-timeline */
+  html.no-tl .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease-hero),transform .7s var(--ease-hero)}
+  html.no-tl .reveal.in{opacity:1;transform:none}
+
   /* work */
-  .entry{
-    display:grid;grid-template-columns:90px 1fr auto;gap:34px;align-items:baseline;
-    padding:42px 0;border-bottom:1px solid rgba(201,162,39,.14);
-    cursor:default;transition:padding .35s;
-  }
-  .entry:first-of-type{border-top:1px solid rgba(201,162,39,.14)}
+  .entry{display:grid;grid-template-columns:90px 1fr auto;gap:34px;align-items:baseline;text-decoration:none;color:inherit;
+    padding:42px 0;border-bottom:1px solid var(--line-gold);position:relative;transition:padding .35s var(--ease-hero)}
+  .entry:first-of-type{border-top:1px solid var(--line-gold)}
+  .entry::after{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:100%;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease-hero)}
   .entry:hover{padding-left:18px}
-  .entry .num{
-    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:34px;color:var(--gold);
-  }
-  .entry .body h3{
-    font-family:'Cormorant Garamond',serif;font-weight:500;
-    font-size:clamp(30px,3.6vw,52px);margin-bottom:10px;
-  }
-  .entry .body p{color:var(--bone-dim);font-weight:300;max-width:58ch;line-height:1.65}
-  .entry .body .outcome{
-    margin-top:14px;font-family:'Cormorant Garamond',serif;font-style:italic;
-    font-size:18px;color:var(--gold);
-  }
-  .entry .body .outcome::before{content:"— ";color:var(--bone-dim)}
+  .entry:hover::after{transform:scaleX(1)}
+  .entry .num{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:34px;color:var(--accent)}
+  .entry .body h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:var(--fs-h3);margin-bottom:10px;transition:color .3s}
+  .entry:hover .body h3{color:var(--accent-bright)}
+  .entry .body p{color:var(--ink-dim);font-weight:300;max-width:58ch;line-height:1.65}
+  .entry .body .outcome{margin-top:14px;font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:18px;color:var(--accent)}
+  .entry .body .outcome::before{content:"— ";color:var(--ink-dim)}
   .entry .tags{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
-  .entry .tags i{
-    font-style:normal;font-size:10px;letter-spacing:.22em;text-transform:uppercase;
-    border:1px solid var(--line);color:var(--bone-dim);padding:6px 12px;border-radius:99px;
-  }
-  .entry .go{
-    font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--bone-dim);
-    align-self:center;display:flex;align-items:center;gap:10px;transition:color .3s;
-  }
-  .entry:hover .go{color:var(--gold-bright)}
-  /* method */
+  .entry .tags i{font-style:normal;font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+    border:1px solid var(--line-gold);color:var(--ink-dim);padding:6px 12px;border-radius:999px}
+  .entry .go{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-dim);
+    align-self:center;display:flex;align-items:center;gap:10px;transition:color .3s}
+  .entry .go::after{content:"→";transition:transform .35s var(--ease-hero)}
+  .entry:hover .go{color:var(--accent-bright)}
+  .entry:hover .go::after{transform:translateX(6px)}
+
+  /* creed — the alchemist's laws (scrollytelling, sticky pin, JS-driven --p) */
+  .creed{position:relative}
+  .creed-stage{position:sticky;top:0;height:100svh;display:grid;place-items:center;overflow:hidden}
+  .creed-inner{max-width:72ch;text-align:center;padding:0 24px;display:grid;place-items:center}
+  .beat{grid-area:1/1;opacity:0;will-change:opacity}
+  .beat .law{font-family:'Cormorant Garamond',serif;font-weight:500;font-style:italic;
+    font-size:clamp(32px,5vw,64px);line-height:1.12}
+  .beat .law b{font-style:normal;color:var(--accent)}
+  .beat p{margin-top:20px;color:var(--ink-dim);font-weight:300;max-width:46ch;margin-inline:auto;line-height:1.7}
+  .creed .dots{position:absolute;bottom:56px;left:0;right:0;display:flex;justify-content:center;gap:12px}
+  .creed .dots i{width:8px;height:8px;border-radius:50%;background:var(--line-gold);transition:background .3s}
+  .creed .dots i.on{background:var(--accent)}
+  .creed .bar{position:absolute;left:50%;bottom:0;width:1px;height:56px;background:var(--line-gold);overflow:hidden}
+  .creed .bar::after{content:"";position:absolute;inset:0;background:var(--accent);transform:scaleY(0);transform-origin:top}
+  .creed .counter{position:absolute;top:28px;right:40px;font-family:'Space Grotesk',monospace;
+    font-size:10px;letter-spacing:.3em;color:var(--ink-dim)}
+
+  /* method — numbered steps, line draws on enter */
   .method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
-  .card{
-    border:1px solid var(--line);padding:40px 34px;position:relative;
-    transition:background .4s,border-color .4s,transform .4s;
-  }
-  .card:hover{background:rgba(201,162,39,.05);border-color:var(--gold);transform:translateY(-6px)}
-  .card .glyph{font-size:44px;color:var(--gold);font-family:'Cormorant Garamond',serif}
-  .card h4{
-    font-family:'Cormorant Garamond',serif;font-weight:500;font-size:28px;
-    margin:18px 0 12px;
-  }
-  .card p{color:var(--bone-dim);font-weight:300;line-height:1.7;font-size:14px}
-  .card .step{
-    position:absolute;top:14px;right:18px;font-size:10px;letter-spacing:.3em;
-    color:var(--bone-dim);
-  }
+  .card{border:1px solid var(--line-gold);padding:40px 34px;position:relative;
+    background:var(--bg);transition:background .4s,border-color .4s,transform .4s var(--ease-hero)}
+  .card:hover{background:var(--surface);border-color:var(--accent);transform:translateY(-6px)}
+  .card .glyph{font-size:44px;color:var(--accent);font-family:'Cormorant Garamond',serif}
+  .card h4{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:28px;margin:18px 0 12px}
+  .card p{color:var(--ink-dim);font-weight:300;line-height:1.7;font-size:14px}
+  .card .step{position:absolute;top:14px;right:18px;font-size:10px;letter-spacing:.3em;color:var(--ink-dim);
+    display:flex;align-items:center;gap:8px}
+  .card .step::after{content:"";width:0;height:1px;background:var(--accent);transition:width .5s var(--ease-hero)}
+  .card:hover .step::after{width:34px}
+
+  /* proof — three true numbers */
+  .proof{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:-32px;padding-bottom:0}
+  .proof .m{border-top:1px solid var(--line-gold);padding-top:24px}
+  .proof .m b{display:block;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:44px;color:var(--accent);font-variant-numeric:tabular-nums;line-height:1}
+  .proof .m span{margin-top:10px;display:block;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-dim)}
+
   /* correspondence */
   #correspondence{padding-bottom:150px;position:relative}
-  .big-correspond{
-    font-family:'Cormorant Garamond',serif;font-weight:500;font-style:italic;
-    font-size:clamp(40px,6vw,90px);line-height:1.05;max-width:16ch;
-  }
+  .big-correspond{font-family:'Cormorant Garamond',serif;font-weight:500;font-style:italic;
+    font-size:clamp(40px,6vw,90px);line-height:1.05;max-width:16ch}
   .links{margin-top:44px;display:flex;gap:18px;flex-wrap:wrap}
-  .links a{
-    text-decoration:none;color:var(--bone);font-size:12px;letter-spacing:.26em;
-    text-transform:uppercase;border:1px solid var(--gold);padding:14px 26px;
-    transition:background .3s,color .3s;
-  }
-  .links a:hover{background:var(--gold);color:var(--void)}
-  .fine{
-    margin-top:52px;color:var(--bone-dim);font-weight:300;font-size:14px;line-height:1.8;
-    max-width:52ch;
-  }
-  .fine b{color:var(--gold);font-weight:500}
-  footer{
-    border-top:1px solid var(--line);padding:26px 56px 36px;
+  .links a{text-decoration:none;color:var(--ink);font-size:12px;letter-spacing:.26em;
+    text-transform:uppercase;border:1px solid var(--accent);padding:14px 26px;position:relative;overflow:hidden;
+    transition:color .3s}
+  .links a::before{content:"";position:absolute;inset:0;background:var(--accent);transform:translateY(101%);transition:transform .35s var(--ease-hero)}
+  .links a:hover{color:var(--bg)}
+  .links a:hover::before{transform:translateY(0)}
+  .links a span{position:relative;z-index:1}
+  .fine{margin-top:52px;color:var(--ink-dim);font-weight:300;font-size:14px;line-height:1.8;max-width:52ch}
+  .fine b{color:var(--accent);font-weight:500}
+
+  footer{border-top:1px solid var(--line-gold);padding:26px 56px 36px;
     display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
-    font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--bone-dim);
+    font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-dim)}
+  footer .sig{color:var(--accent)}
+  footer nav{font-size:10px;letter-spacing:.24em;gap:22px}
+  footer nav a{color:inherit;text-decoration:none}
+  footer nav a:hover{color:var(--accent)}
+
+  /* reduced-motion discipline — everything collapses instantly */
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{
+      animation-duration:0.01ms !important;animation-iteration-count:1 !important;
+      transition-duration:0.01ms !important;scroll-behavior:auto !important}
+    .mask>span{transform:none}
+    html.no-tl .reveal{opacity:1;transform:none}
+    .discipline span{animation:none}
+    .discipline{overflow-x:auto}
+    .sigil{animation:none}
+    .hero .cue{display:none}
+    .avail .dot{animation:none}
+    .creed .counter,.creed .dots,.creed .bar{display:none}
   }
-  footer .sig{color:var(--gold)}
-  /* reveal */
-  .up{opacity:0;transform:translateY(24px);animation:up .9s cubic-bezier(.2,.7,.2,1) forwards}
-  .d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}.d4{animation-delay:.4s}
-  @keyframes up{to{opacity:1;transform:none}}
+
   @media(max-width:860px){
     header,.hero,section,footer{padding-left:24px;padding-right:24px}
     header{flex-direction:column;gap:14px;align-items:flex-start}
@@ -208,68 +249,85 @@
     .entry{grid-template-columns:1fr;gap:12px}
     .entry .go{display:none}
     .method-grid{grid-template-columns:1fr}
-    .sigil{width:380px;height:380px;right:-110px;opacity:.35}
+    .proof{grid-template-columns:1fr;gap:20px}
+    .sigil{width:380px;height:380px;right:-110px;opacity:.3}
     .hero-foot{flex-direction:column;gap:8px;align-items:flex-start}
+    .hero .cue{display:none}
     .frame{inset:8px}
   }
 </style>
+<noscript><style>
+  .creed .beat{opacity:1;position:static}
+  .creed-stage{position:static;height:auto;padding:48px 0;display:block}
+  .creed .dots,.creed .counter,.creed .bar{display:none}
+</style></noscript>
 </head>
 <body>
-<div class="frame"></div>
-<div class="grain"></div>
+<a class="skip" href="#work">Skip to content</a>
+<div class="frame" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div id="progress" aria-hidden="true"></div>
 
 <header>
-  <svg class="sigil-head" viewBox="0 0 24 24" fill="none" stroke-width="1">
+  <svg class="sigil-head" viewBox="0 0 24 24" fill="none" stroke-width="1" aria-hidden="true">
     <circle cx="12" cy="12" r="8"/><rect x="12" y="12" width="10" height="10" transform="rotate(45 12 12)"/>
     <path d="M12 3v6M12 15v6M3 12h6M15 12h6"/>
   </svg>
-  <nav>
+  <nav aria-label="Primary">
     <a href="#work">Work</a>
+    <a href="#creed">Creed</a>
     <a href="#method">Method</a>
     <a href="#correspondence">Contact</a>
   </nav>
 </header>
 
-<section class="hero">
-  <svg class="sigil" viewBox="0 0 200 200" fill="none" stroke="#c9a227" stroke-width="0.7">
+<main>
+<section class="hero" aria-label="Introduction">
+  <svg class="sigil" viewBox="0 0 200 200" fill="none" stroke="#d4af37" stroke-width="0.7" aria-hidden="true">
     <circle cx="100" cy="100" r="86" stroke-dasharray="2 3"/>
     <circle cx="100" cy="100" r="52"/>
     <rect x="82" y="82" width="36" height="36" transform="rotate(45 100 100)"/>
     <path d="M100 8v30M100 162v30M8 100h30M162 100h30"/>
-    <circle cx="100" cy="100" r="6" fill="#c9a227" stroke="none"/>
-    <circle cx="30" cy="30" r="3" fill="#c9a227" stroke="none"/>
-    <circle cx="170" cy="170" r="3" fill="#c9a227" stroke="none"/>
-    <circle cx="170" cy="30" r="3" fill="#c9a227" stroke="none"/>
-    <circle cx="30" cy="170" r="3" fill="#c9a227" stroke="none"/>
+    <circle cx="100" cy="100" r="6" fill="#d4af37" stroke="none"/>
+    <circle cx="30" cy="30" r="3" fill="#d4af37" stroke="none"/>
+    <circle cx="170" cy="170" r="3" fill="#d4af37" stroke="none"/>
+    <circle cx="170" cy="30" r="3" fill="#d4af37" stroke="none"/>
+    <circle cx="30" cy="170" r="3" fill="#d4af37" stroke="none"/>
   </svg>
 
   <div class="eyebrow">
     Opus I — Portfolio · MMXXVI
-    <span class="avail"><span class="dot"></span>One slot open</span>
+    <span class="avail"><span class="dot" aria-hidden="true"></span>One slot open</span>
   </div>
-  <h1 class="up">I turn raw digital <em>lead</em> into systems that mint gold while you sleep.</h1>
-  <p class="lede up d1">
+  <h1>
+    <span class="sr-only">I turn raw digital lead into systems that mint gold while you sleep.</span>
+    <span class="mask" aria-hidden="true"><span>I turn raw digital lead</span></span>
+    <span class="mask" aria-hidden="true"><span>into systems that</span></span>
+    <span class="mask" aria-hidden="true"><span>mint <em>gold</em> while you sleep.</span></span>
+  </h1>
+  <p class="lede">
     I am the <strong>Cyber Alchemist</strong> — a builder of bots, funnels, and quiet
     automations. I study the tools of the machine age, read the AI flood daily so you
     don't have to, and distill what works into <span class="gold">systems that run
     themselves</span> — in the dark, while you keep the daylight.
   </p>
-  <div class="hero-foot up d2">
+  <div class="hero-foot">
     <span>Bots · Tools · Funnels · Curation</span>
-    <a href="https://t.me/cyberalchemistt">t.me/cyberalchemistt →</a>
+    <a href="https://t.me/cyberalchemistt">t.me/cyberalchemistt</a>
   </div>
+  <div class="cue" aria-hidden="true"></div>
 </section>
 
-<div class="discipline">
+<div class="discipline" aria-hidden="true">
   <span>
     <b>✦</b>&nbsp;Automation&nbsp;&nbsp;<b>✦</b>&nbsp;Bots&nbsp;&nbsp;<b>✦</b>&nbsp;Funnels&nbsp;&nbsp;<b>✦</b>&nbsp;AI Tools&nbsp;&nbsp;<b>✦</b>&nbsp;Growth Systems&nbsp;&nbsp;<b>✦</b>&nbsp;Quiet Machines&nbsp;&nbsp;<b>✦</b>&nbsp;Automation&nbsp;&nbsp;<b>✦</b>&nbsp;Bots&nbsp;&nbsp;<b>✦</b>&nbsp;Funnels&nbsp;&nbsp;<b>✦</b>&nbsp;AI Tools&nbsp;&nbsp;<b>✦</b>&nbsp;Growth Systems&nbsp;&nbsp;<b>✦</b>&nbsp;Quiet Machines&nbsp;&nbsp;
   </span>
 </div>
 
-<section id="work">
-  <div class="section-label">Selected Work</div>
+<section id="work" aria-labelledby="work-label">
+  <div class="section-label" id="work-label">Selected Work</div>
 
-  <div class="entry">
+  <a class="entry reveal" href="#correspondence">
     <div class="num">I.</div>
     <div class="body">
       <h3>The Funnel Familiar</h3>
@@ -277,10 +335,10 @@
       <div class="outcome">Every lead warmed while the operator sleeps</div>
       <div class="tags"><i>Telegram Bot</i><i>Funnel</i><i>Node.js</i><i>Ops</i></div>
     </div>
-    <div class="go">Read the entry →</div>
-  </div>
+    <div class="go">Read the entry</div>
+  </a>
 
-  <div class="entry">
+  <a class="entry reveal" href="#correspondence">
     <div class="num">II.</div>
     <div class="body">
       <h3>The Daily Vault</h3>
@@ -288,10 +346,10 @@
       <div class="outcome">A vetted tool drop daily, zero noise</div>
       <div class="tags"><i>Curation</i><i>Research Ops</i><i>Channel</i></div>
     </div>
-    <div class="go">Read the entry →</div>
-  </div>
+    <div class="go">Read the entry</div>
+  </a>
 
-  <div class="entry">
+  <a class="entry reveal" href="#correspondence">
     <div class="num">III.</div>
     <div class="body">
       <h3>Overflow Engine</h3>
@@ -299,10 +357,10 @@
       <div class="outcome">Noise becomes publishable intelligence</div>
       <div class="tags"><i>Automation</i><i>Pipelines</i><i>Publishing</i></div>
     </div>
-    <div class="go">Read the entry →</div>
-  </div>
+    <div class="go">Read the entry</div>
+  </a>
 
-  <div class="entry">
+  <a class="entry reveal" href="#correspondence">
     <div class="num">IV.</div>
     <div class="body">
       <h3>The Grimoire</h3>
@@ -310,51 +368,154 @@
       <div class="outcome">Field notes for builders, sent weekly</div>
       <div class="tags"><i>Newsletter</i><i>Field Notes</i></div>
     </div>
-    <div class="go">Read the entry →</div>
+    <div class="go">Read the entry</div>
+  </a>
+</section>
+
+<section class="creed" id="creed" aria-labelledby="creed-label">
+  <div class="section-label reveal" id="creed-label">The Alchemist's Creed</div>
+  <div class="creed-stage">
+    <div class="creed-inner">
+      <div class="beat" data-i="0">
+        <div class="law">Everything valuable is <b>buried in noise.</b></div>
+        <p>New tools, new tricks, new glitches — the flood is 99% dross. I read it daily so you don't have to.</p>
+      </div>
+      <div class="beat" data-i="1">
+        <div class="law">A machine that runs itself <b>outvalues</b> one that needs you.</div>
+        <p>Built small, built to run unattended, built to be measured. The empire grows on its own; I tend the flame.</p>
+      </div>
+      <div class="beat" data-i="2">
+        <div class="law"><b>Quiet</b> wins.</div>
+        <p>No glasshouses, no noise, no maintenance dramas. The best system is the one you forget is running.</p>
+      </div>
+    </div>
+    <div class="counter" aria-hidden="true">01 / 03</div>
+    <div class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+    <div class="bar" aria-hidden="true"></div>
   </div>
 </section>
 
-<section id="method">
-  <div class="section-label">The Method</div>
+<section id="method" aria-labelledby="method-label">
+  <div class="section-label reveal" id="method-label">The Method</div>
   <div class="method-grid">
-    <div class="card up">
+    <div class="card reveal">
       <span class="step">01</span>
-      <div class="glyph">&#128161;</div>
+      <div class="glyph" aria-hidden="true">&#128161;</div>
       <h4>Distill</h4>
       <p>Everything valuable is buried in noise. I read the flood — new tools, new tricks, new glitches — and boil it down to what actually works.</p>
     </div>
-    <div class="card up d1">
+    <div class="card reveal">
       <span class="step">02</span>
-      <div class="glyph">&#128293;</div>
+      <div class="glyph" aria-hidden="true">&#128293;</div>
       <h4>Ignite</h4>
       <p>A good idea becomes a working system: bot, funnel, or pipeline. Built small, built to run unattended, built to be measured.</p>
     </div>
-    <div class="card up d2">
+    <div class="card reveal">
       <span class="step">03</span>
-      <div class="glyph">&#9878;</div>
+      <div class="glyph" aria-hidden="true">&#9878;</div>
       <h4>Solidify</h4>
       <p>What works gets scaled and hardened — monitoring, restarts, quiet maintenance. The empire grows on its own; I tend the flame.</p>
     </div>
   </div>
 </section>
 
-<section id="correspondence">
-  <div class="section-label">Correspondence</div>
-  <div class="big-correspond up">Have a machine you want built in the dark?</div>
-  <div class="links up d1">
-    <a href="https://t.me/cyberalchemistt">Telegram →</a>
-    <a href="mailto:alchemist@proton.me">Write a letter</a>
+<section id="proof" class="proof" aria-label="By the numbers">
+  <div class="m reveal"><b>24/7</b><span>The machines run unattended</span></div>
+  <div class="m reveal"><b>01×</b><span>The vault ships every morning</span></div>
+  <div class="m reveal"><b>01</b><span>Commission slot at a time</span></div>
+</section>
+
+<section id="correspondence" aria-labelledby="correspondence-label">
+  <div class="section-label" id="correspondence-label">Correspondence</div>
+  <div class="big-correspond reveal">Have a machine you want built in the dark?</div>
+  <div class="links reveal">
+    <a href="https://t.me/cyberalchemistt"><span>Telegram →</span></a>
+    <a href="mailto:alchemist@proton.me"><span>Write a letter</span></a>
   </div>
-  <p class="fine up d2">
+  <p class="fine reveal">
     One commission slot open at a time — I take fewer, weirder, more interesting
     projects and run them <b>to completion</b>. If you have a boring problem
     that deserves a quiet machine, that's my favourite kind.
   </p>
 </section>
+</main>
 
 <footer>
   <span>THE CYBER ALCHEMIST <span class="sig">✦</span> MMXXVI</span>
+  <nav aria-label="Footer">
+    <a href="#work">Work</a><a href="#method">Method</a><a href="#correspondence">Contact</a>
+  </nav>
   <span>No glasshouses · No noise · Built in the dark</span>
 </footer>
+
+<script>
+(function () {
+  var rm = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* 1 · scroll-driven reveals: native timeline where supported, IO fallback otherwise */
+  var tl = CSS.supports('animation-timeline', 'view()');
+  if (!tl) {
+    document.documentElement.classList.add('no-tl');
+    var targets = [].slice.call(document.querySelectorAll('.reveal'));
+    if (rm.matches) {
+      targets.forEach(function (el) { el.classList.add('in'); });
+    } else if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -12% 0px', threshold: 0.1 });
+      targets.forEach(function (el) { io.observe(el); });
+    } else {
+      targets.forEach(function (el) { el.classList.add('in'); });
+    }
+  }
+
+  /* 2 · Creed scrollytelling: sticky pin + progress math. Transforms/opacity only. */
+  var creed = document.querySelector('.creed');
+  var beats = [].slice.call(document.querySelectorAll('.creed .beat'));
+  var dots = [].slice.call(document.querySelectorAll('.creed .dots i'));
+  var counter = document.querySelector('.creed .counter');
+  var bar = document.querySelector('.creed .bar');
+  if (creed && !rm.matches && beats.length) {
+    var stage = creed.querySelector('.creed-stage');
+    var active = -1; // force initial write of beat states
+    var ticking = false;
+
+    function update() {
+      var rect = creed.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var total = rect.height - vh;
+      var progress = total > 0 ? Math.min(1, Math.max(0, (vh * 0.5 - rect.top) / total)) : 0;
+      creed.style.setProperty('--p', progress);
+      var i = Math.min(beats.length - 1, Math.floor(progress * beats.length * 1.001));
+      if (i !== active) {
+        active = i;
+        beats.forEach(function (b, k) { b.style.opacity = k === i ? '1' : '0'; });
+        dots.forEach(function (d, k) { d.classList.toggle('on', k === i); });
+        counter.textContent = '0' + (i + 1) + ' / 0' + beats.length;
+      }
+      ticking = false;
+    }
+    function onScroll() {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+  } else if (creed) {
+    /* reduced-motion / no-JS: show all beats stacked */
+    beats.forEach(function (b, k) { b.style.opacity = '1'; });
+    creed.classList.add('static');
+    /* ensure the sticky stage becomes natural height in reduced-motion */
+    var stageEl = creed.querySelector('.creed-stage');
+    if (stageEl) { stageEl.style.position = 'static'; stageEl.style.height = 'auto'; }
+  }
+
+  /* 3 · footer year (tiny, runs once) */
+  var y = document.querySelector('.fine .yr');
+  if (y) y.textContent = new Date().getFullYear();
+})();
+</script>
 </body>
 </html>
