@@ -139,7 +139,8 @@ header {
     inset: 9%;
     border-radius: 50%;
     background: url('sigil.png') center / cover no-repeat;
-    box-shadow: var(--glow-effect);
+    border: 1px solid rgba(212, 175, 55, 0.45);
+    box-shadow: var(--glow-effect), inset 0 0 14px rgba(0, 0, 0, 0.6);
 }
 
 .ouroboros-center svg {
