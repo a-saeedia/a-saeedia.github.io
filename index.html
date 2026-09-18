@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Alchemist's Portfolio</title>
-    <meta property="og:image" content="sigil.png">
     <link rel="icon" type="image/png" href="sigil.png">
+    <meta property="og:image" content="sigil.png">
     <link rel="stylesheet" href="styles.css">
     <!-- Google Fonts for esoteric headers and clean financial data -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;500&display=swap" rel="stylesheet">
@@ -13,81 +13,66 @@
 <body>
     <div class="grimoire-container">
         <header>
-            <div class="brand-mark" aria-hidden="true">
-                <img src="sigil.png" alt="" width="512" height="512">
-            </div>
-            <div class="brand-text">
-                <h1 class="esoteric-title">Arcana Portfolio</h1>
-                <p class="subtitle">Transmuting Capital into Wealth</p>
-            </div>
+            <h1 class="esoteric-title">Arcana Portfolio</h1>
+            <p class="subtitle">Transmuting Capital into Wealth</p>
         </header>
 
         <main class="alchemy-grid">
             <!-- Centerpiece: Ouroboros -->
-            <div class="symbol-card ouroboros-center" data-metric="Total AUM: $1.2M · APY: 14.5%"
-                 role="figure" aria-label="Ouroboros. Compound interest and total portfolio yield. Total AUM 1.2 million dollars, annual percentage yield 14.5 percent." tabindex="0">
-                <div class="svg-container" aria-hidden="true">
-                    <svg class="ouroboros" viewBox="0 0 200 200">
-                        <circle class="halo" cx="100" cy="100" r="76" fill="none" stroke="currentColor" stroke-width="1" opacity="0.12"/>
+            <div class="symbol-card ouroboros-center" data-metric="Total AUM: $1.2M | APY: 14.5%">
+                <div class="svg-container">
+                    <svg class="ouroboros" viewBox="0 0 200 200" aria-hidden="true">
+                        <circle class="halo" cx="100" cy="100" r="76" fill="none" stroke="currentColor" stroke-width="1" opacity="0.10"/>
                         <circle class="ring" cx="100" cy="100" r="70" fill="none" stroke="currentColor" stroke-width="6"
                                 pathLength="100" stroke-dasharray="87 13" stroke-linecap="round"/>
                         <circle class="ring-inner" cx="100" cy="100" r="56" fill="none" stroke="currentColor" stroke-width="1"
-                                opacity="0.4" pathLength="100" stroke-dasharray="58 42" stroke-linecap="round"/>
+                                opacity="0.35" pathLength="100" stroke-dasharray="58 42" stroke-linecap="round"/>
                         <circle class="eye" cx="146" cy="84" r="3.4" fill="currentColor"/>
                         <path class="jaw" d="M140 92 q 12 4 8 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                         <path class="tail" d="M60 92 q -10 -2 -12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        <circle cx="100" cy="100" r="6" fill="currentColor" opacity="0.9"/>
                     </svg>
                 </div>
                 <h2>The Magnum Opus</h2>
-                <p class="node-sub">Compound Interest · Total Yield</p>
             </div>
 
             <!-- Elements Grid -->
             <div class="elements-container">
-                <div class="element-node fire" data-asset="AI &amp; Tech Equities" data-allocation="40%" role="figure" aria-label="Fire. High-growth AI and tech equities. Allocation 40 percent." tabindex="0">
-                    <div class="svg-container" aria-hidden="true">
-                        <svg viewBox="0 0 100 100">
-                            <polygon points="50,16 84,78 16,78" fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="round"/>
-                            <polygon points="50,36 70,66 30,66" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" opacity="0.35"/>
+                <div class="element-node fire" data-asset="AI Equities" data-allocation="40%">
+                    <div class="svg-container">
+                        <svg viewBox="0 0 100 100" aria-hidden="true">
+                            <polygon points="50,16 84,78 16,78" fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
                         </svg>
                     </div>
-                    <span class="alloc">40%</span>
                 </div>
-                <div class="element-node earth" data-asset="Commodities &amp; Real Estate" data-allocation="25%" role="figure" aria-label="Earth. Commodities and real estate. Allocation 25 percent." tabindex="0">
-                    <div class="svg-container" aria-hidden="true">
-                        <svg viewBox="0 0 100 100">
-                            <polygon points="50,84 16,22 84,22" fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="round"/>
+                <div class="element-node earth" data-asset="Commodities" data-allocation="25%">
+                    <div class="svg-container">
+                        <svg viewBox="0 0 100 100" aria-hidden="true">
+                            <polygon points="50,84 16,22 84,22" fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
                             <line x1="30" y1="52" x2="70" y2="52" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
                         </svg>
                     </div>
-                    <span class="alloc">25%</span>
                 </div>
-                <div class="element-node water" data-asset="Liquidity · Cash Reserves" data-allocation="15%" role="figure" aria-label="Water. Liquidity and cash reserves. Allocation 15 percent." tabindex="0">
-                    <div class="svg-container" aria-hidden="true">
-                        <svg viewBox="0 0 100 100">
-                            <polygon points="50,84 16,22 84,22" fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="round"/>
+                <div class="element-node water" data-asset="Liquidity" data-allocation="15%">
+                    <div class="svg-container">
+                        <svg viewBox="0 0 100 100" aria-hidden="true">
+                            <polygon points="50,84 16,22 84,22" fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
                         </svg>
                     </div>
-                    <span class="alloc">15%</span>
                 </div>
-                <div class="element-node air" data-asset="Fixed Income · Bonds" data-allocation="20%" role="figure" aria-label="Air. Fixed income and bonds. Allocation 20 percent." tabindex="0">
-                    <div class="svg-container" aria-hidden="true">
-                        <svg viewBox="0 0 100 100">
-                            <polygon points="50,16 84,78 16,78" fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="round"/>
+                <div class="element-node air" data-asset="Fixed Income" data-allocation="20%">
+                    <div class="svg-container">
+                        <svg viewBox="0 0 100 100" aria-hidden="true">
+                            <polygon points="50,16 84,78 16,78" fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
                             <line x1="30" y1="48" x2="70" y2="48" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
                         </svg>
                     </div>
-                    <span class="alloc">20%</span>
                 </div>
             </div>
         </main>
 
-        <footer class="grimoire-footer">
-            <p>Sigil by Arman · Figures shown are illustrative · <em>Compounding happens quietly.</em></p>
-        </footer>
-
-        <div id="tooltip" class="mystic-tooltip hidden" role="tooltip"></div>
+        <div id="tooltip" class="mystic-tooltip hidden">
+            <!-- JS will populate this with financial data on hover -->
+        </div>
     </div>
     <script src="app.js"></script>
 </body>
