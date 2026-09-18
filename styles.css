@@ -128,7 +128,7 @@ header {
 
 .ouroboros-center .svg-container {
     position: relative;
-    width: 62%;
+    width: 66%;
     color: var(--gold-accent);
 }
 
@@ -136,7 +136,7 @@ header {
 .ouroboros-center .svg-container::before {
     content: '';
     position: absolute;
-    inset: 24%;
+    inset: 9%;
     border-radius: 50%;
     background: url('sigil.png') center / cover no-repeat;
     box-shadow: var(--glow-effect);
