@@ -8,72 +8,52 @@ document.addEventListener('DOMContentLoaded', () => {
         window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function describe(el) {
-        // Ouroboros carries a full metric line; nodes carry asset + allocation.
+        // The centerpiece carries a whole metric line; elements carry asset + allocation.
         if (el.dataset.metric) return el.dataset.metric;
-        return el.dataset.asset + ' — ' + el.dataset.allocation + ' allocation';
+        return el.dataset.asset + ' — ' + el.dataset.allocation;
     }
 
     let raf = 0;
     let targetX = 0;
     let targetY = 0;
-    let shown = false;
 
-    function place(x, y) {
-        if (reduceMotion) {
-            snap(x, y);
-            return;
-        }
-        targetX = x;
-        targetY = y;
-        if (!raf) raf = requestAnimationFrame(lerp);
+    function clampX(x, w) { return Math.max(8, Math.min(x, window.innerWidth - w - 8)); }
+    function clampY(y, h) { return Math.max(8, Math.min(y, window.innerHeight - h - 8)); }
+
+    function placeAt(x, y) {
+        tooltip.style.left = clampX(x, tooltip.offsetWidth) + 'px';
+        tooltip.style.top = clampY(y, tooltip.offsetHeight) + 'px';
     }
 
     function lerp() {
-        const tx = tooltip.offsetWidth;
-        const ty = tooltip.offsetHeight;
-        let cx = parseFloat(tooltip.style.left) || 0;
-        let cy = parseFloat(tooltip.style.top) || 0;
-        cx += (targetX - cx) * 0.18;
-        cy += (targetY - cy) * 0.18;
-        tooltip.style.left = clampX(cx, tx) + 'px';
-        tooltip.style.top = clampY(cy, ty) + 'px';
-        if (Math.abs(targetX - cx) > 0.5 || Math.abs(targetY - cy) > 0.5) {
+        const cx = parseFloat(tooltip.style.left) || 0;
+        const cy = parseFloat(tooltip.style.top) || 0;
+        const nx = cx + (targetX - cx) * 0.18;
+        const ny = cy + (targetY - cy) * 0.18;
+        placeAt(nx, ny);
+        if (Math.abs(targetX - nx) > 0.5 || Math.abs(targetY - ny) > 0.5) {
             raf = requestAnimationFrame(lerp);
         } else {
             raf = 0;
         }
     }
 
-    function snap(x, y) {
-        tooltip.style.left = clampX(x, tooltip.offsetWidth) + 'px';
-        tooltip.style.top = clampY(y, tooltip.offsetHeight) + 'px';
+    function startFollow(x, y) {
+        targetX = x;
+        targetY = y;
+        if (reduceMotion) { placeAt(x, y); return; }
+        if (!raf) raf = requestAnimationFrame(lerp);
     }
 
-    function clampX(x, w) {
-        return Math.max(8, Math.min(x, window.innerWidth - w - 8));
-    }
-    function clampY(y, h) {
-        return Math.max(8, Math.min(y, window.innerHeight - h - 8));
-    }
-
-    function show(el, x, y) {
+    function reveal(el, x, y) {
         tooltip.textContent = describe(el);
         tooltip.classList.add('visible');
         tooltip.classList.remove('hidden');
-        shown = true;
-        // measure after content is set, then position (offset by 14px below the cursor)
-        if (reduceMotion) {
-            snap(x + 12, y + 16);
-        } else {
-            tooltip.style.left = clampX(x + 12, tooltip.offsetWidth) + 'px';
-            tooltip.style.top = clampY(y + 16, tooltip.offsetHeight) + 'px';
-            raf = 0;
-        }
+        placeAt(x + 12, y + 16);
         el.classList.add('is-hovered');
     }
 
-    function hide(el) {
-        shown = false;
+    function conceal(el) {
         tooltip.classList.remove('visible');
         tooltip.classList.add('hidden');
         if (raf) { cancelAnimationFrame(raf); raf = 0; }
@@ -82,36 +62,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     symbols.forEach(symbol => {
         symbol.addEventListener('mouseenter', (e) => {
-            show(symbol, e.clientX, e.clientY);
+            reveal(symbol, e.clientX, e.clientY);
         });
 
         symbol.addEventListener('mousemove', (e) => {
-            // track the cursor smoothly while moving inside the node
-            targetX = e.clientX + 12;
-            targetY = e.clientY + 16;
-            if (reduceMotion) { snap(targetX, targetY); return; }
-            if (!raf) raf = requestAnimationFrame(lerp);
+            startFollow(e.clientX + 12, e.clientY + 16);
         });
 
         symbol.addEventListener('mouseleave', () => {
-            hide(symbol);
+            conceal(symbol);
         });
 
-        // keyboard parity for the same reveal
+        // keyboard parity: focus reveals the same data
         symbol.addEventListener('focusin', (e) => {
             const rect = symbol.getBoundingClientRect();
-            show(symbol, rect.left + rect.width / 2, rect.top + rect.height / 2);
+            reveal(symbol, rect.left + rect.width / 2, rect.top + rect.height / 2);
         });
 
         symbol.addEventListener('focusout', () => {
-            hide(symbol);
+            conceal(symbol);
         });
     });
 
-    // never trap the tooltip at a stale position if the window resizes
     window.addEventListener('resize', () => {
-        if (!shown) return;
+        if (!tooltip.classList.contains('visible')) return;
         const r = tooltip.getBoundingClientRect();
-        snap(r.left, r.top);
+        placeAt(r.left, r.top);
     });
 });
