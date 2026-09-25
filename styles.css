@@ -131,7 +131,17 @@ main { position: relative; z-index: 1; }
   text-decoration: none;
 }
 
-.sigil { width: 26px; height: 26px; opacity: 0.92; }
+.sigil {
+  width: 42px;
+  height: 42px;
+  opacity: 1;
+  animation: sigil-drift 7s var(--ease) infinite alternate;
+}
+
+@keyframes sigil-drift {
+  from { transform: rotate(-5deg) scale(1); }
+  to   { transform: rotate(5deg) scale(1.05); }
+}
 
 .nav-name {
   font-weight: 600;
@@ -176,7 +186,17 @@ main { position: relative; z-index: 1; }
 .hero-title .line:nth-child(2) .line-inner {
   font-style: italic;
   font-weight: 500;
-  color: var(--accent-bright);
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(100deg, var(--accent) 0%, var(--accent-bright) 28%, var(--ink) 50%, var(--accent-bright) 72%, var(--accent) 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: sheen 9s linear infinite;
+}
+
+@keyframes sheen {
+  to { background-position: 220% 0; }
 }
 
 .hero-sub {
@@ -343,6 +363,7 @@ main { position: relative; z-index: 1; }
 .span-5 { grid-column: span 5; }
 .span-6 { grid-column: span 6; }
 .span-7 { grid-column: span 7; }
+.span-12 { grid-column: span 12; }
 
 .card {
   position: relative;
@@ -372,19 +393,6 @@ main { position: relative; z-index: 1; }
   gap: 1.4rem;
   text-decoration: none;
   color: inherit;
-}
-
-.card-media {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 1.6rem;
-  align-items: start;
-}
-
-.card-media .card-link {
-  display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
 }
 
 .card-arrow {
@@ -502,17 +510,6 @@ main { position: relative; z-index: 1; }
   font-size: 0.9rem;
 }
 
-/* media thumb (The Alchemist) */
-.card-thumb {
-  width: 100%;
-  height: 100%;
-  min-height: 240px;
-  object-fit: cover;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  filter: saturate(0.85) contrast(1.02);
-}
-
 .more {
   margin: 2.6rem 0 0;
   color: var(--ink-dim);
@@ -550,6 +547,12 @@ main { position: relative; z-index: 1; }
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: 0 30px 70px -40px rgba(3, 8, 16, 0.9);
+  transition: transform 1.1s var(--ease), box-shadow 0.6s var(--ease);
+}
+
+.frame:hover img {
+  transform: scale(1.03);
+  box-shadow: 0 34px 80px -38px rgba(3, 8, 16, 0.95);
 }
 
 .frame figcaption {
@@ -688,8 +691,6 @@ main { position: relative; z-index: 1; }
 @media (max-width: 860px) {
   .about { grid-template-columns: 1fr; }
   .span-5, .span-6, .span-7 { grid-column: span 12; }
-  .card-media { grid-template-columns: 1fr; }
-  .card-thumb { min-height: 200px; }
   .frames { gap: 4rem; }
   .nav-links { display: none; }
 }
