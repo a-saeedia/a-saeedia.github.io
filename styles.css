@@ -1,3 +1,5 @@
+@import url("assets/fonts/fonts.css");
+
 /* ============================================================
    Arman Saeedi — portfolio (zero CDN, hand-rolled)
    Tokens: void #0a0b12 · surface #12141f · ink #e8eaf2
@@ -14,7 +16,7 @@
   --accent: #40e0ff;
   --gold: #d4a017;
 
-  --font-sans: "Inter var", "Segoe UI", -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Inter", "Segoe UI", -apple-system, "Helvetica Neue", Arial, sans-serif;
   --font-mono: "JetBrains Mono", "Cascadia Code", Consolas, "Courier New", monospace;
 
   --radius: 14px;
@@ -64,6 +66,7 @@ a { color: inherit; text-decoration: none; }
 
 /* ============ HERO ============ */
 .hero {
+  min-height: 100vh;
   min-height: 100svh;
   display: flex; flex-direction: column; justify-content: center;
   max-width: var(--container); margin: 0 auto;
@@ -214,6 +217,19 @@ section { max-width: var(--container); margin: 0 auto; padding: clamp(4rem, 10vw
 
 @media (hover: none) {
   .card:hover { transform: none; }
+}
+
+/* ============ PHONE / NARROW ============ */
+@media (max-width: 640px) {
+  .nav { padding-inline: 1rem; }
+  .nav-links { gap: 0.9rem; }
+  .nav-links a { font-size: 0.7rem; }
+  .hero-title { font-size: clamp(1.5rem, 7.4vw, 2.9rem); }
+}
+
+@media (max-width: 430px) {
+  .nav-name { display: none; }
+  .btn-big { font-size: 0.9rem; padding: 0.95rem 1.5rem; }
 }
 
 /* ============ REDUCED MOTION ============ */
