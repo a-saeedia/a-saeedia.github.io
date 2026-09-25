@@ -136,4 +136,14 @@
   window.addEventListener('load', function () {
     if (hasST) ScrollTrigger.refresh();
   });
+
+  /* ---------- Nav scrolled state ---------- */
+  var navEl = document.getElementById('nav');
+  if (navEl) {
+    var onNavScroll = function () {
+      navEl.classList.toggle('scrolled', window.scrollY > 12);
+    };
+    onNavScroll();
+    window.addEventListener('scroll', onNavScroll, { passive: true });
+  }
 })();
