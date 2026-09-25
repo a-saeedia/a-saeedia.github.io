@@ -132,21 +132,6 @@
     });
   }
 
-  /* ---------- Pinned story: horizontal frame scrub (desktop only) ---------- */
-  if (hasST && window.matchMedia('(min-width: 901px)').matches) {
-    var frames = document.getElementById('frames');
-    if (frames && frames.scrollWidth > frames.clientWidth) {
-      var distance = frames.scrollWidth - frames.clientWidth;
-      gsap.to(frames, {
-        x: function () { return -distance; },
-        ease: 'none',
-        scrollTrigger: {
-          trigger: '.story-pin', start: 'top top', end: 'bottom bottom', scrub: 1
-        }
-      });
-    }
-  }
-
   /* ---------- Recompute after images settle ---------- */
   window.addEventListener('load', function () {
     if (hasST) ScrollTrigger.refresh();
