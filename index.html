@@ -16,6 +16,16 @@
   body { margin: 0; background: var(--void, #0a1420); color: var(--ink, #ede7dc);
          font-family: "Inter", "Segoe UI", system-ui, sans-serif; }
   img { max-width: 100%; display: block; }
+  /* credential badge strip + certificate image */
+  .cred-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; align-items: center; }
+  .cred-badges img { border: 1px solid var(--border, #2a2f3a); background: #fff; border-radius: 10px;
+                     padding: 4px; width: 52px; height: 52px; object-fit: contain; box-sizing: content-box;
+                     transition: transform .2s ease, box-shadow .2s ease; }
+  .cred-badges img:hover { transform: translateY(-3px) scale(1.06); box-shadow: 0 8px 20px rgba(0,0,0,.35); }
+  .cred-cert { display: block; width: 100%; max-width: 560px; background: #fff; border-radius: 12px;
+               border: 1px solid var(--border, #2a2f3a); box-shadow: 0 12px 32px rgba(0,0,0,.35);
+               margin: 16px 0 2px; transition: box-shadow .2s ease; }
+  .cred-cert:hover { box-shadow: 0 14px 40px rgba(255, 215, 0, .12); }
 </style>
 </head>
 <body data-theme="dark">
@@ -80,19 +90,21 @@
       <p class="eyebrow mono">Google Cloud &amp; GenAI · verified</p>
       <h3 class="cred-title">Cloud &amp; AI platform competency</h3>
       <p class="cred-meta mono">Bronze League · 50 points · Member since 2023 · Google Skills</p>
-      <div class="cred-grid">
-        <span class="chip">Digital Transformation</span>
-        <span class="chip">Cloud Operations</span>
-        <span class="chip">Modern Infrastructure</span>
-        <span class="chip">Data Transformation</span>
-        <span class="chip">GenAI Fundamentals</span>
-        <span class="chip">Large Language Models</span>
-        <span class="chip">Vertex AI Studio</span>
-        <span class="chip">Transformers &amp; BERT</span>
-        <span class="chip">Attention Mechanisms</span>
-        <span class="chip">Encoder–Decoder Architecture</span>
-        <span class="chip">Image Generation</span>
-        <span class="chip">Responsible AI</span>
+      <div class="cred-badges">
+        <img src="assets/badges/01-scaling-ops.png" alt="Scaling with Google Cloud Operations" loading="lazy" />
+        <img src="assets/badges/02-modernize-infra.png" alt="Modernize Infrastructure and Applications with Google Cloud" loading="lazy" />
+        <img src="assets/badges/03-data-transformation.png" alt="Exploring Data Transformation with Google Cloud" loading="lazy" />
+        <img src="assets/badges/04-digital-transformation.png" alt="Digital Transformation with Google Cloud" loading="lazy" />
+        <img src="assets/badges/05-vertex-ai-studio.png" alt="Introduction to Vertex AI Studio" loading="lazy" />
+        <img src="assets/badges/06-image-captioning.png" alt="Create Image Captioning Models" loading="lazy" />
+        <img src="assets/badges/07-transformers-bert.png" alt="Transformer Models and BERT Model" loading="lazy" />
+        <img src="assets/badges/08-attention.png" alt="Attention Mechanism" loading="lazy" />
+        <img src="assets/badges/09-encoder-decoder.png" alt="Encoder-Decoder Architecture" loading="lazy" />
+        <img src="assets/badges/10-image-generation.png" alt="Introduction to Image Generation" loading="lazy" />
+        <img src="assets/badges/11-genai-fundamentals.png" alt="Generative AI Fundamentals" loading="lazy" />
+        <img src="assets/badges/12-responsible-ai.png" alt="Introduction to Responsible AI" loading="lazy" />
+        <img src="assets/badges/13-llm.png" alt="Introduction to Large Language Models" loading="lazy" />
+        <img src="assets/badges/14-generative-ai.png" alt="Introduction to Generative AI" loading="lazy" />
       </div>
       <p class="cred-meta mono"><a href="https://www.cloudskillsboost.google/public_profiles/492cb39f-c8e5-45c7-a52b-09043432818d" target="_blank" rel="noopener" style="color:var(--accent-bright)">Verify Google profile ↗</a></p>
     </div>
@@ -101,6 +113,7 @@
       <p class="eyebrow mono">Harvard University · CS50AI · verified</p>
       <h3 class="cred-title">CS50's Introduction to Artificial Intelligence with Python</h3>
       <p class="cred-meta mono">CS50 · Harvard University · David J. Malan · 2026 · 12 projects</p>
+      <img class="cred-cert" src="assets/cs50ai-cert.png" alt="CS50's Introduction to Artificial Intelligence with Python — certificate" loading="lazy" />
       <div class="cred-grid">
         <span class="chip">Search Algorithms</span>
         <span class="chip">Knowledge &amp; Reasoning</span>
