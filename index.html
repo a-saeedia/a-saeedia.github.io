@@ -16,17 +16,6 @@
   body { margin: 0; background: var(--void, #0a1420); color: var(--ink, #ede7dc);
          font-family: "Inter", "Segoe UI", system-ui, sans-serif; }
   img { max-width: 100%; display: block; }
-  /* credential badge strip + certificate image */
-  .cred-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; align-items: center; }
-  .cred-badges img { border: 1px solid var(--border, #2a2f3a); background: #fff; border-radius: 10px;
-                     padding: 4px; width: 52px; height: 52px; object-fit: contain; box-sizing: content-box;
-                     transition: transform .2s ease, box-shadow .2s ease; }
-  .cred-badges img:hover { transform: translateY(-3px) scale(1.06); box-shadow: 0 8px 20px rgba(0,0,0,.35); }
-  .cred-cert { display: block; width: 100%; max-width: 560px; background: #fff; border-radius: 12px;
-               border: 1px solid var(--border, #2a2f3a); box-shadow: 0 12px 32px rgba(0,0,0,.35);
-               margin: 16px 0 2px; transition: box-shadow .2s ease; }
-  .cred-cert:hover { box-shadow: 0 14px 40px rgba(255, 215, 0, .12); }
-  .plate .cred-badges { justify-content: center; }
 </style>
 </head>
 <body data-theme="dark">
@@ -86,6 +75,26 @@
       <div class="stat" data-reveal><dt data-count="44" data-suffix="+">44</dt><dd>public repos</dd></div>
       <div class="stat" data-reveal><dt data-count="15" data-suffix="+ hrs/wk">15</dt><dd>manual work eliminated</dd></div>
     </dl>
+
+    <div class="cred" data-reveal>
+      <p class="eyebrow mono">Google Cloud &amp; GenAI · verified</p>
+      <h3 class="cred-title">Cloud &amp; AI platform competency</h3>
+      <p class="cred-meta mono">Bronze League · 50 points · Member since 2023 · Google Skills</p>
+      <div class="cred-grid">
+        <span class="chip">Digital Transformation</span>
+        <span class="chip">Cloud Operations</span>
+        <span class="chip">Modern Infrastructure</span>
+        <span class="chip">Data Transformation</span>
+        <span class="chip">GenAI Fundamentals</span>
+        <span class="chip">Large Language Models</span>
+        <span class="chip">Vertex AI Studio</span>
+        <span class="chip">Transformers &amp; BERT</span>
+        <span class="chip">Attention Mechanisms</span>
+        <span class="chip">Encoder–Decoder Architecture</span>
+        <span class="chip">Image Generation</span>
+        <span class="chip">Responsible AI</span>
+      </div>
+    </div>
   </section>
 
   <!-- ================= WORK ================= -->
@@ -210,62 +219,42 @@
         </figure>
 
         <figure class="frame plate">
-          <div class="cred-badges plate-badges">
-            <img src="assets/badges/01-scaling-ops.png" alt="Scaling with Google Cloud Operations" loading="lazy" />
-            <img src="assets/badges/02-modernize-infra.png" alt="Modernize Infrastructure and Applications with Google Cloud" loading="lazy" />
-            <img src="assets/badges/03-data-transformation.png" alt="Exploring Data Transformation with Google Cloud" loading="lazy" />
-            <img src="assets/badges/04-digital-transformation.png" alt="Digital Transformation with Google Cloud" loading="lazy" />
-            <img src="assets/badges/05-vertex-ai-studio.png" alt="Introduction to Vertex AI Studio" loading="lazy" />
-            <img src="assets/badges/06-image-captioning.png" alt="Create Image Captioning Models" loading="lazy" />
-            <img src="assets/badges/07-transformers-bert.png" alt="Transformer Models and BERT Model" loading="lazy" />
-            <img src="assets/badges/08-attention.png" alt="Attention Mechanism" loading="lazy" />
-            <img src="assets/badges/09-encoder-decoder.png" alt="Encoder-Decoder Architecture" loading="lazy" />
-            <img src="assets/badges/10-image-generation.png" alt="Introduction to Image Generation" loading="lazy" />
-            <img src="assets/badges/11-genai-fundamentals.png" alt="Generative AI Fundamentals" loading="lazy" />
-            <img src="assets/badges/12-responsible-ai.png" alt="Introduction to Responsible AI" loading="lazy" />
-            <img src="assets/badges/13-llm.png" alt="Introduction to Large Language Models" loading="lazy" />
-            <img src="assets/badges/14-generative-ai.png" alt="Introduction to Generative AI" loading="lazy" />
-          </div>
+          <svg class="sigil-mark" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
+            <circle cx="60" cy="60" r="42"/>
+            <path d="M60 30 L82 84 H38 Z"/>
+            <line x1="30" y1="102" x2="90" y2="102"/>
+          </svg>
           <p class="stage mono">Op. I — Credentials</p>
           <p class="plate-title">Google Cloud,<br>studied end to end.</p>
-          <p class="plate-sub mono">14 official skill badges — infrastructure, data, and generative AI. Verified below.</p>
+          <p class="plate-sub mono">Generative AI · Large Language Models · Responsible AI — the full certificate track.</p>
           <figcaption class="mono">02 · Google Cloud track</figcaption>
         </figure>
 
         <figure class="frame">
           <p class="frame-kicker mono">The track</p>
-          <h3 class="frame-title">Five foundational courses, told in dates.</h3>
-          <p class="frame-copy">Certified in sequence from transformer foundations to the ethics of generative systems — nine more skills followed across cloud infrastructure, data, and image workflows:</p>
+          <h3 class="frame-title">Five courses, one arc — Nov 2023 to Mar 2024.</h3>
+          <p class="frame-copy">Certified in sequence, from the foundations of transformer architecture to the ethics of generative systems:</p>
           <ul class="cred-list">
             <li><span class="cred-name">Generative AI Fundamentals</span><span class="cred-date mono">Mar 2024</span></li>
             <li><span class="cred-name">Introduction to Large Language Models</span><span class="cred-date mono">Feb 2024</span></li>
             <li><span class="cred-name">Transformer Models and BERT</span><span class="cred-date mono">Jan 2024</span></li>
             <li><span class="cred-name">Encoder–Decoder Architecture</span><span class="cred-date mono">Dec 2023</span></li>
             <li><span class="cred-name">Introduction to Responsible AI</span><span class="cred-date mono">Nov 2023</span></li>
-            <li><span class="cred-name">+9 more — Vertex AI Studio, image generation, data transformation, scaling ops…</span><span class="cred-date mono">2024–25</span></li>
           </ul>
           <figcaption class="mono">03 · The track</figcaption>
         </figure>
 
         <figure class="frame">
-          <p class="frame-kicker mono">Harvard · CS50AI · verified</p>
-          <h3 class="frame-title">CS50's Introduction to Artificial Intelligence with Python.</h3>
-          <img class="cred-cert" src="assets/cs50ai-cert.png" alt="CS50's Introduction to Artificial Intelligence with Python — certificate" loading="lazy" />
-          <p class="frame-copy">Completed 2026 · David J. Malan · 12 projects — search, knowledge, uncertainty, optimization, machine learning, neural networks, and NLP.</p>
-          <p class="cred-meta mono"><a href="https://cs50.harvard.edu/certificates/3e384a3b-a134-487d-96b6-584067b59447" target="_blank" rel="noopener" style="color:var(--accent-bright)">Verify certificate ↗</a></p>
+          <p class="frame-kicker mono">Foundations</p>
+          <h3 class="frame-title">CS50 — Harvard University.</h3>
+          <p class="frame-copy">The course that taught me to think in computer-science terms: memory, algorithms, abstraction — the layer beneath every system I ship.</p>
+          <div class="metric-row">
+            <span class="metric">
+              <strong class="metric-strong">CS50</strong>
+              <span class="metric-label mono">Harvard · 2018</span>
+            </span>
+          </div>
           <figcaption class="mono">04 · Harvard CS50</figcaption>
-        </figure>
-
-        <figure class="frame plate stage-b">
-          <svg class="sigil-mark" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
-            <circle cx="45" cy="60" r="30"/>
-            <circle cx="75" cy="60" r="30"/>
-            <line x1="60" y1="12" x2="60" y2="108"/>
-          </svg>
-          <p class="stage mono">Op. II — Practice</p>
-          <p class="plate-title">Research, build,<br>deploy, measure.</p>
-          <p class="plate-sub mono">One loop, repeated: build the smallest tool that removes the work, ship it, then measure. Never leave a system half-tended.</p>
-          <figcaption class="mono">05 · The practice</figcaption>
         </figure>
 
         <figure class="frame">
