@@ -988,3 +988,45 @@ main { position: relative; z-index: 1; }
   .nav-links { display: none; }
   .cred-list li { flex-direction: column; align-items: flex-start; gap: 0.35rem; }
 }
+/* ---------- certifications (end of page) ---------- */
+
+.cred-sec {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: clamp(5rem, 10vh, 8rem) clamp(1.2rem, 4vw, 3rem);
+}
+
+.cred-sec-head {
+  max-width: 640px;
+}
+
+.cred-desc {
+  color: var(--ink-dim);
+  font-size: 1.02rem;
+  margin: 1.2rem 0 0;
+  max-width: 52ch;
+}
+
+.cred-sec .cred {
+  grid-column: auto;
+  margin-top: 2.4rem;
+  padding-top: 1.9rem;
+  border-top: 1px solid var(--line);
+}
+
+.cred-link {
+  display: inline-block;
+  margin-top: 1.8rem;
+  color: var(--accent-bright);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(201, 162, 39, 0.4);
+  padding-bottom: 2px;
+  transition: border-color 0.25s var(--ease), color 0.25s var(--ease);
+}
+
+.cred-link:hover {
+  border-color: var(--accent-bright);
+  color: var(--ink);
+}
