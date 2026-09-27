@@ -52,7 +52,7 @@
   /* ---------- Hero: line-mask reveal (SplitText chars, else line fallback) ---------- */
   var heroLines = document.querySelectorAll('.hero-title .line-inner');
   if (heroLines.length) {
-    if (typeof window.SplitText !== 'undefined') {
+    if (document.documentElement.getAttribute('lang') !== 'fa' && typeof window.SplitText !== 'undefined') {
       var heroTl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 0.9 } });
       Array.prototype.forEach.call(heroLines, function (line, i) {
         var split = new SplitText(line, { type: 'chars' });

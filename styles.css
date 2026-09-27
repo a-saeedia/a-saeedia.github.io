@@ -981,3 +981,64 @@ a.cert-link {
   .nav-links { display: none; }
 }
 
+/* ---------- language switch ---------- */
+
+/* neutral nav fix: with a 3rd child (.lang-switch) in the fixed nav,
+   auto margin keeps the link group pinned right (identical for EN's 2-child nav) */
+.nav-links { margin-inline-start: auto; }
+
+.lang-switch {
+  margin-inline-start: 1.4rem;
+  font-size: 0.78rem;
+  padding: 0.42rem 0.9rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--ink-dim);
+  text-decoration: none;
+  transition: color 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+
+.lang-switch:hover,
+.lang-switch:focus-visible {
+  color: var(--accent-bright);
+  border-color: var(--accent);
+}
+
+/* ---------- Farsi (fa) overrides ---------- */
+
+html[lang="fa"] body {
+  font-family: "Vazirmatn", "Segoe UI", Tahoma, sans-serif;
+}
+
+html[lang="fa"] .mono,
+html[lang="fa"] .nav-links a,
+html[lang="fa"] .nav-name,
+html[lang="fa"] .pipe-node,
+html[lang="fa"] .marquee .marquee-track span,
+html[lang="fa"] .marquee .marquee-track i {
+  font-family: "Vazirmatn", var(--font-mono);
+  letter-spacing: 0;
+}
+
+html[lang="fa"] .hero-title,
+html[lang="fa"] .section-title,
+html[lang="fa"] .frame-title,
+html[lang="fa"] .card h3 {
+  font-family: "Vazirmatn", var(--font-display);
+  letter-spacing: 0;
+}
+
+html[lang="fa"] .hero-title {
+  font-weight: 700;
+}
+
+html[lang="fa"] .hero-title .line:nth-child(2) .line-inner,
+html[lang="fa"] .section-title em {
+  font-style: normal;
+}
+
+html[lang="fa"] .eyebrow,
+html[lang="fa"] .frame-kicker {
+  text-transform: none;
+}
+
