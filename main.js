@@ -116,6 +116,56 @@
     });
   });
 
+  /* ---------- Story: pinned crossfade (desktop, ScrollTrigger) ---------- */
+  (function () {
+    if (!hasST) return;
+    if (!window.matchMedia('(min-width: 861px)').matches) return;
+    var pin = document.querySelector('.story-pin');
+    if (!pin) return;
+    var frames = document.querySelectorAll('#frames .frame');
+    if (frames.length < 2) return;
+
+    var cueNum = document.querySelector('.cue-num');
+    var cueFill = document.querySelector('.cue-fill');
+
+    var pad = function (n) {
+      var s = n < 10 ? '0' + n : String(n);
+      if (root.getAttribute('lang') === 'fa') {
+        s = s.replace(/[0-9]/g, function (d) {
+          return '۰۱۲۳۴۵۶۷۸۹'[d];
+        });
+      }
+      return s;
+    };
+
+    // No-FOUC: stack the stage and hide frame 2 before first paint.
+    gsap.set(frames[0], { autoAlpha: 1 });
+    gsap.set(frames[1], { autoAlpha: 0 });
+    pin.classList.add('pinned');
+
+    var tl = gsap.timeline({
+      defaults: { ease: 'none' },
+      scrollTrigger: {
+        trigger: pin,
+        start: 'top top+=70',
+        end: '+=1150',
+        scrub: 0.5,
+        pin: true,
+        anticipatePin: 1
+      },
+      onUpdate: function () {
+        var p = tl.progress();
+        var i = p >= 0.5 ? 1 : 0;
+        var label = pad(i + 1);
+        if (cueNum && cueNum.textContent !== label) cueNum.textContent = label;
+        if (cueFill) cueFill.style.transform = 'scaleX(' + p + ')';
+      }
+    });
+
+    tl.to(frames[0], { autoAlpha: 0, duration: 1 }, 1.5)
+      .fromTo(frames[1], { autoAlpha: 0 }, { autoAlpha: 1, duration: 1 }, 1.5);
+  })();
+
   /* ---------- Magnetic hover (fine pointers only) ---------- */
   if (window.matchMedia('(pointer: fine)').matches) {
     var magnetics = document.querySelectorAll('.magnetic');

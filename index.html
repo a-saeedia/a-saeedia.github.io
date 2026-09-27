@@ -10,7 +10,7 @@
 <link rel="icon" type="image/png" href="assets/logo.png">
 <link rel="preload" href="/assets/fonts/fraunces-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/font-7.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=13">
+<link rel="stylesheet" href="styles.css?v=14">
 <style>
   /* critical first paint — styled even if any stylesheet fails to load */
   html { background: #0a1420; }
@@ -20,6 +20,9 @@
 </style>
 </head>
 <body data-theme="dark">
+
+  <!-- scroll progress line (pure CSS, scroll-driven) -->
+  <div class="progress" aria-hidden="true"></div>
 
 <nav class="nav" id="nav">
   <a class="nav-brand magnetic" href="#top" aria-label="Arman Saeedi — home">
@@ -192,6 +195,8 @@
         <p class="eyebrow mono">Case study</p>
         <h2 class="section-title" data-scrub>Credentials before claims — the record, the track, the practice.</h2>
       </div>
+      <div class="story-stage">
+
       <div class="frames" id="frames">
 
         <figure class="frame">
@@ -236,6 +241,13 @@
           <figcaption class="mono">02 · The outcomes</figcaption>
         </figure>
 
+      </div>
+      </div>
+
+      <div class="story-cue" aria-hidden="true">
+        <span class="cue-num mono">01</span>
+        <span class="cue-track"><span class="cue-fill"></span></span>
+        <span class="cue-total mono">02</span>
       </div>
     </div>
   </section>
@@ -342,6 +354,6 @@
 <script src="vendor/ScrollTrigger.min.js?v=10"></script>
 <script src="vendor/SplitText.min.js?v=10"></script>
 <script src="vendor/lenis.min.js?v=10"></script>
-<script src="main.js?v=10"></script>
+<script src="main.js?v=11"></script>
 </body>
 </html>

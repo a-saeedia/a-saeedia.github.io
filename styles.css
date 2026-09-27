@@ -970,6 +970,8 @@ a.cert-link {
   .marquee-track { animation: none; }
   .hero-title .line:nth-child(2) .line-inner { animation: none; }
   .available i { animation: none; }
+  .progress { animation: none !important; }
+  .card:hover .pipe-arrow { animation: none; }
 }
 
 /* ---------- small screens ---------- */
@@ -1002,6 +1004,106 @@ a.cert-link {
 .lang-switch:focus-visible {
   color: var(--accent-bright);
   border-color: var(--accent);
+}
+
+/* ---------- scroll progress line (CSS scroll-driven, zero JS) ---------- */
+
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  z-index: 60;
+  pointer-events: none;
+  background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  animation: progress-grow linear;
+  animation-duration: auto;
+  animation-timeline: scroll(root);
+}
+
+@keyframes progress-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+html[lang="fa"] .progress {
+  transform-origin: 100% 50%;
+}
+
+/* ---------- story scrollytelling — pinned crossfade ----------
+   main.js adds .pinned to .story-pin on desktop (ScrollTrigger +
+   no reduced motion). Without it the frames stay a static column. */
+
+html.js-on body.anim .story-pin.pinned .frames {
+  display: grid;
+}
+
+html.js-on body.anim .story-pin.pinned .frame {
+  grid-area: 1 / 1;
+  margin: 0;
+}
+
+.story-cue {
+  display: none;
+}
+
+html.js-on body.anim .story-pin.pinned .story-cue {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-top: 2.8rem;
+}
+
+.cue-num,
+.cue-total {
+  color: var(--accent-bright);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  font-variant-numeric: tabular-nums;
+}
+
+.cue-track {
+  position: relative;
+  display: inline-block;
+  width: clamp(120px, 20vw, 240px);
+  height: 1px;
+  background: var(--line-strong);
+  overflow: hidden;
+}
+
+.cue-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+
+html[lang="fa"] .cue-fill {
+  transform-origin: 100% 50%;
+}
+
+/* ---------- pipe visual (flag card) — slide on hover ---------- */
+
+.pipe-arrow {
+  --pipe-x: 0.3em;
+  display: inline-block;
+}
+
+html[lang="fa"] .pipe-arrow {
+  --pipe-x: -0.3em;
+}
+
+@keyframes pipe-slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(var(--pipe-x)); }
+}
+
+.card:hover .pipe-arrow {
+  animation: pipe-slide 0.9s var(--ease) infinite alternate;
 }
 
 /* ---------- Farsi (fa) overrides ---------- */
