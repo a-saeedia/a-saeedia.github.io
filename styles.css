@@ -800,6 +800,17 @@ main { position: relative; z-index: 1; }
   transform: translateY(-3px);
 }
 
+a.cert-link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  cursor: pointer;
+}
+.cert-link:focus-visible {
+  outline: 2px solid var(--accent-bright);
+  outline-offset: 2px;
+}
+
 .cert-card img {
   display: block;
   width: 100%;
