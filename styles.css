@@ -765,6 +765,91 @@ main { position: relative; z-index: 1; }
   font-size: 0.875rem;
 }
 
+/* ---------- credentials — real certificates, pictures ---------- */
+
+.cred-sec {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: clamp(5rem, 10vh, 8rem) clamp(1.2rem, 4vw, 3rem);
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 4rem;
+}
+
+.cred-sec .frame-copy {
+  margin-top: 1.4rem;
+}
+
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.4rem;
+  margin-top: 3rem;
+}
+
+.cert-card {
+  margin: 0;
+  background: linear-gradient(180deg, var(--surface-2) 0%, var(--surface) 100%);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: border-color 0.4s var(--ease), transform 0.4s var(--ease);
+}
+
+.cert-card:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-3px);
+}
+
+.cert-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  padding: 1.1rem;
+  background: var(--void);
+}
+
+.cert-card.cert-feature img {
+  aspect-ratio: 4 / 3;
+}
+
+.cert-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.9rem 1rem 1.1rem;
+  border-top: 1px solid var(--line);
+}
+
+.cert-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.02rem;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.cert-issuer {
+  color: var(--accent);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.cert-pdf {
+  margin-top: 0.5rem;
+  color: var(--accent-bright);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent-soft);
+  align-self: flex-start;
+  transition: border-color 0.3s var(--ease);
+}
+
+.cert-pdf:hover { border-color: var(--accent-bright); }
+
 /* ---------- contact ---------- */
 
 .contact {
