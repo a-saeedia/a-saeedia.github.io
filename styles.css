@@ -850,6 +850,17 @@ main { position: relative; z-index: 1; }
 
 .cert-pdf:hover { border-color: var(--accent-bright); }
 
+.prof-link {
+  color: var(--accent-bright);
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  text-underline-offset: 4px;
+  transition: color 0.25s var(--ease), text-decoration-color 0.25s var(--ease);
+}
+.prof-link:hover { color: var(--ink); text-decoration-color: var(--accent-bright); }
+
 /* ---------- contact ---------- */
 
 .contact {
