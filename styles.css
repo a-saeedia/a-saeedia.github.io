@@ -1030,3 +1030,74 @@ main { position: relative; z-index: 1; }
   border-color: var(--accent-bright);
   color: var(--ink);
 }
+
+/* ---------- certificate wall (real badge images) ---------- */
+
+.cert-league {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  margin-top: 2.6rem;
+  padding: 1.15rem 1.3rem;
+  max-width: 580px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(180deg, var(--surface), var(--surface-2));
+}
+
+.league-badge {
+  width: 62px;
+  height: auto;
+  flex: none;
+}
+
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.cert-card {
+  margin: 0;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(180deg, var(--surface), var(--surface-2));
+  transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
+}
+
+.cert-card:hover {
+  border-color: rgba(201, 162, 39, 0.45);
+  transform: translateY(-3px);
+}
+
+.cert-card img {
+  width: 100%;
+  height: auto;
+  border-radius: calc(var(--radius-sm) - 4px);
+  aspect-ratio: 240 / 218;
+  object-fit: contain;
+  background: #0e1824;
+}
+
+.cert-card figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.cert-card strong {
+  font-size: 0.85rem;
+  line-height: 1.35;
+}
+
+.cert-date {
+  color: var(--ink-dim);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
