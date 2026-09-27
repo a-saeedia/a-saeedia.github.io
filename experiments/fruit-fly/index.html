@@ -9,10 +9,7 @@
       content="Paint fruit fly neurons and watch their activity drive an animated fly."
     />
     <title>Neural Canvas</title>
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='5' fill='none' stroke='%23c9d3db' stroke-width='2'/><circle cx='8' cy='8' r='1.6' fill='%23101c26'/></svg>"
-    />
+    <link rel="icon" type="image/png" href="../../assets/logo.png" />
     <link
       rel="preload"
       href="./fonts/InterVariable.woff2"
@@ -20,27 +17,10 @@
       type="font/woff2"
       crossorigin
     />
-    <script type="module" crossorigin src="./assets/index-CQRKHMtv.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-Do_54AWi.css">
+    <script type="module" crossorigin src="./assets/index-BKPWdAzE.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-Cwzftnbz.css">
   </head>
   <body>
-    <style>
-      .ff-back {
-        position: fixed;
-        bottom: 14px;
-        left: 14px;
-        z-index: 9999;
-        background: rgba(16, 23, 29, 0.85);
-        color: #c9d3db;
-        border: 1px solid rgba(255, 255, 255, 0.14);
-        border-radius: 999px;
-        padding: 6px 12px;
-        font: 500 11px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
-        letter-spacing: 0.06em;
-        text-decoration: none;
-      }
-    </style>
-    <a class="ff-back" href="../" aria-label="Back to the portfolio">← portfolio</a>
     <svg class="icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <defs>
         <symbol id="i-paint" viewBox="0 0 24 24">
@@ -173,31 +153,44 @@
         </div>
       </section>
       <section class="fly-pane" aria-labelledby="fly-heading">
-        <div class="fly-surface" id="fly-surface">
-          <div class="pane-head fly-head">
-            <span class="section-index">02</span>
+        <div class="pane-head fly-head">
+          <span class="section-index">02</span>
+          <div class="pane-title">
             <h2 id="fly-heading">Watch the response</h2>
-            <div class="transport">
-              <button id="pause" disabled>
-                <svg class="icon"><use id="pause-icon" href="#i-pause" /></svg
-                ><span id="pause-label">Pause</span></button
-              ><span class="divider"></span
-              ><button id="reset" disabled>
-                <svg class="icon"><use href="#i-reset" /></svg><span>Reset</span>
-              </button>
-            </div>
+            <p>Connectome-driven behavior · kept alive &amp; running by Arman Saeedi</p>
           </div>
+          <div class="transport">
+            <button id="pause" disabled>
+              <svg class="icon"><use id="pause-icon" href="#i-pause" /></svg
+              ><span id="pause-label">Pause</span></button
+            ><span class="divider"></span
+            ><button id="reset" disabled>
+              <svg class="icon"><use href="#i-reset" /></svg><span>Reset</span>
+            </button>
+          </div>
+        </div>
+        <div class="fly-surface" id="fly-surface">
+          <div class="fly-stage" id="fly-stage">
+            <canvas id="fly" aria-label="Fly response. Drag to orbit; scroll to zoom."></canvas>
+          </div>
+        </div>
+        <div class="fly-toolbar">
           <div class="response-bar">
             <div class="body-state">
               <span id="behavior-dot"></span><span id="behavior">At rest</span
               ><small id="body-description"></small>
             </div>
-            <div class="camera-tabs" aria-label="Camera view">
-              <button
-                id="camera-side"
-                aria-pressed="true"
-                title="Fixed viewing angle to see the fly turn"
+            <div class="feed-tools">
+              <label
+                class="train-toggle"
+                title="Reinforcement: the fly forages toward food and every meal counts as reward"
+                ><input id="train" type="checkbox" /><span>Train</span></label
+              ><span class="meals-chip" title="Meals eaten during training"
+                >Meals <output id="meals">0</output></span
               >
+            </div>
+            <div class="camera-tabs" aria-label="Camera view">
+              <button id="camera-side" aria-pressed="true" title="Fixed viewing angle to see the fly turn">
                 Side</button
               ><button id="camera-top" aria-pressed="false">Top</button
               ><button
@@ -206,14 +199,18 @@
                 title="Chase camera that follows the fly’s heading"
               >
                 Follow
+              </button
+              ><button
+                id="camera-orbit"
+                aria-pressed="false"
+                title="Free 3D orbit — drag to rotate, scroll to zoom"
+              >
+                Orbit 3D
               </button>
             </div>
           </div>
-          <div class="fly-stage" id="fly-stage">
-            <canvas id="fly" aria-label="Fly response. Drag to orbit; scroll to zoom."></canvas>
-          </div>
           <div class="specimen-line">
-            <span>Drosophila melanogaster</span
+            <span>Drosophila melanogaster · a Neural Canvas fork, run by Arman Saeedi</span
             ><span class="scale"><i id="scale-bar"></i><span id="scale-value">1 mm</span></span>
           </div>
         </div>
