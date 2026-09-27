@@ -990,6 +990,9 @@ a.cert-link {
 .nav-links { margin-inline-start: auto; }
 
 .lang-switch {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px; /* comfortable tap target on both EN + fa nav */
   margin-inline-start: 1.4rem;
   font-size: 0.78rem;
   padding: 0.42rem 0.9rem;
