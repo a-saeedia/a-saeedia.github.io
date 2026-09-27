@@ -116,13 +116,16 @@
     });
   });
 
-  /* ---------- Story: pinned crossfade (desktop, ScrollTrigger) ---------- */
+  /* ---------- Story: pinned scrollytelling (desktop, ScrollTrigger) ----------
+     Scroll drives per-beat cascades (kicker > title > copy > metrics > caption)
+     with quick crossfades between frames. Reduced motion / no JS / mobile:
+     static editorial column (see CSS). */
   (function () {
     if (!hasST) return;
     if (!window.matchMedia('(min-width: 861px)').matches) return;
     var pin = document.querySelector('.story-pin');
     if (!pin) return;
-    var frames = document.querySelectorAll('#frames .frame');
+    var frames = Array.prototype.slice.call(document.querySelectorAll('#frames .frame'));
     if (frames.length < 2) return;
 
     var cueNum = document.querySelector('.cue-num');
@@ -138,9 +141,13 @@
       return s;
     };
 
-    // No-FOUC: stack the stage and hide frame 2 before first paint.
-    gsap.set(frames[0], { autoAlpha: 1 });
-    gsap.set(frames[1], { autoAlpha: 0 });
+    var CASCADE = ['.frame-kicker', '.frame-title', '.frame-copy', '.metric-row', 'figcaption'];
+    var BEAT_LEN = 1.9; // timeline units per beat window
+    var FADE_IN = 0.35; // beat entrance
+    var FADE_OUT = 0.3; // beat exit, overlapping the next entrance
+
+    // No-FOUC: stack the stage, only frame 1 visible before first paint.
+    frames.forEach(function (f, i) { gsap.set(f, { autoAlpha: i === 0 ? 1 : 0 }); });
     pin.classList.add('pinned');
 
     var tl = gsap.timeline({
@@ -148,22 +155,34 @@
       scrollTrigger: {
         trigger: pin,
         start: 'top top+=70',
-        end: '+=1150',
+        end: '+=' + (frames.length * 420),
         scrub: 0.5,
         pin: true,
         anticipatePin: 1
       },
       onUpdate: function () {
         var p = tl.progress();
-        var i = p >= 0.5 ? 1 : 0;
+        var t = p * tl.duration();
+        var i = Math.min(frames.length - 1, Math.floor(t / BEAT_LEN));
         var label = pad(i + 1);
         if (cueNum && cueNum.textContent !== label) cueNum.textContent = label;
         if (cueFill) cueFill.style.transform = 'scaleX(' + p + ')';
       }
     });
 
-    tl.to(frames[0], { autoAlpha: 0, duration: 1 }, 1.5)
-      .fromTo(frames[1], { autoAlpha: 0 }, { autoAlpha: 1, duration: 1 }, 1.5);
+    frames.forEach(function (f, i) {
+      var at = Math.max(0, i * BEAT_LEN - 0.2); // overlap the cut for a crossfade
+      tl.fromTo(f, { autoAlpha: 0 }, { autoAlpha: 1, duration: FADE_IN }, at)
+        .fromTo(
+          CASCADE.map(function (sel) { return f.querySelector(sel); }).filter(Boolean),
+          { autoAlpha: 0, y: 26 },
+          { autoAlpha: 1, y: 0, duration: 0.65, stagger: 0.07 },
+          at + FADE_IN
+        );
+      if (i < frames.length - 1) {
+        tl.to(f, { autoAlpha: 0, duration: FADE_OUT }, i * BEAT_LEN + BEAT_LEN - FADE_OUT);
+      }
+    });
   })();
 
   /* ---------- Magnetic hover (fine pointers only) ---------- */
